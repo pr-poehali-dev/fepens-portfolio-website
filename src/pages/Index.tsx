@@ -23,6 +23,12 @@ const Index = () => {
       description: 'Создаю игры и скрипты для Roblox Studio с использованием Lua',
       icon: 'Gamepad2',
       gradient: 'from-cyan-500 to-blue-500'
+    },
+    {
+      title: 'Блогер',
+      description: 'Создаю контент для YouTube, Twitch и других платформ',
+      icon: 'Video',
+      gradient: 'from-pink-500 to-purple-500'
     }
   ];
 
