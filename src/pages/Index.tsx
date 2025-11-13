@@ -104,11 +104,11 @@ const Index = () => {
           </div>
           <div className="flex justify-center animate-fade-in">
             <div className="relative">
-              <div className="absolute inset-0 rounded-full glow-cyan-strong animate-pulse-glow"></div>
+              <div className="absolute inset-0 glow-cyan-strong animate-pulse-glow rounded-2xl"></div>
               <img
-                src="https://cdn.poehali.dev/files/e23f6567-e335-454c-a5f3-a3d9a43d3dd9.jpg"
+                src="https://cdn.poehali.dev/files/c179648e-d48c-4678-bfe3-1c68dffeca8b.jpg"
                 alt="Profile"
-                className="w-80 h-80 md:w-96 md:h-96 rounded-full object-cover border-4 border-primary relative z-10 animate-float"
+                className="w-80 h-80 md:w-96 md:h-96 object-cover border-4 border-primary relative z-10 animate-float rounded-2xl"
               />
             </div>
           </div>
