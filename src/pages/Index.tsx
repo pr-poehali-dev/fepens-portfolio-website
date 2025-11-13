@@ -37,8 +37,7 @@ const Index = () => {
       <nav className="fixed top-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <h1 className="text-2xl font-bold">
-            <span className="text-foreground">Твое</span>
-            <span className="text-primary text-glow"> Имя</span>
+            <span className="text-primary text-glow">Fepens</span>
           </h1>
           <div className="flex gap-6">
             <a href="#home" className="hover:text-primary transition-colors">
@@ -59,7 +58,7 @@ const Index = () => {
           <div className="space-y-6 animate-fade-in">
             <h2 className="text-5xl md:text-7xl font-bold leading-tight">
               Привет, это{' '}
-              <span className="text-primary text-glow">Твое Имя</span>
+              <span className="text-primary text-glow">Fepens</span>
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground">
               Я <span className="text-primary font-semibold">Roblox Developer</span> и{' '}
@@ -192,7 +191,7 @@ const Index = () => {
 
       <footer className="border-t border-border py-8">
         <div className="container mx-auto px-6 text-center text-muted-foreground">
-          <p>© 2025 Твое Имя. Сделано с 🚀 на poehali.dev</p>
+          <p>© 2025 Fepens. Сделано с 🚀 на poehali.dev</p>
         </div>
       </footer>
     </div>
