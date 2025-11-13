@@ -68,10 +68,10 @@ const Index = () => {
               Создаю увлекательные игры в Roblox и современные веб-приложения
             </p>
             <div className="flex gap-4 pt-4">
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan">
-                Скачать CV
-              </Button>
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Button 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan"
+              >
                 Связаться
               </Button>
             </div>
