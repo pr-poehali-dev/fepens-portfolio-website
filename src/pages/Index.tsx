@@ -23,12 +23,6 @@ const Index = () => {
       description: 'Создаю игры и скрипты для Roblox Studio с использованием Lua',
       icon: 'Gamepad2',
       gradient: 'from-cyan-500 to-blue-500'
-    },
-    {
-      title: 'Web Developer',
-      description: 'Разрабатываю современные веб-сайты и приложения',
-      icon: 'Code2',
-      gradient: 'from-cyan-500 to-teal-500'
     }
   ];
 
@@ -61,11 +55,10 @@ const Index = () => {
               <span className="text-primary text-glow">Fepens</span>
             </h2>
             <p className="text-xl md:text-2xl text-muted-foreground">
-              Я <span className="text-primary font-semibold">Roblox Developer</span> и{' '}
-              <span className="text-primary font-semibold">Web Developer</span>
+              Я <span className="text-primary font-semibold">Roblox Developer</span>
             </p>
             <p className="text-lg text-muted-foreground">
-              Создаю увлекательные игры в Roblox и современные веб-приложения
+              Создаю увлекательные игры и скрипты для Roblox Studio
             </p>
             <div className="flex gap-4 pt-4">
               <Button 
