@@ -11,10 +11,34 @@ const Index = () => {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/7ad5c10c-3e74-4ef2-bf20-709a12b01069', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const skills = [
@@ -164,6 +188,8 @@ const Index = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="bg-background border-border focus:border-primary"
+                  required
+                  disabled={isSubmitting}
                 />
               </div>
               <div>
@@ -174,6 +200,8 @@ const Index = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="bg-background border-border focus:border-primary"
+                  required
+                  disabled={isSubmitting}
                 />
               </div>
               <div>
@@ -183,13 +211,26 @@ const Index = () => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="bg-background border-border focus:border-primary min-h-32"
+                  required
+                  disabled={isSubmitting}
                 />
               </div>
+              {submitStatus === 'success' && (
+                <div className="p-4 bg-primary/20 border border-primary rounded-lg text-center">
+                  <p className="text-primary font-semibold">✓ Сообщение отправлено!</p>
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-red-500/20 border border-red-500 rounded-lg text-center">
+                  <p className="text-red-400">✗ Ошибка отправки. Попробуйте позже.</p>
+                </div>
+              )}
               <Button
                 type="submit"
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground glow-cyan"
+                disabled={isSubmitting}
               >
-                Отправить сообщение
+                {isSubmitting ? 'Отправка...' : 'Отправить сообщение'}
               </Button>
             </form>
           </Card>
