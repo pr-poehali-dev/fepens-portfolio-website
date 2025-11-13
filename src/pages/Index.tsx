@@ -77,28 +77,36 @@ const Index = () => {
             </div>
             <div className="flex gap-4 pt-4">
               <a
-                href="#"
+                href="https://www.youtube.com/@fepens.official/shorts"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover:glow-cyan"
               >
-                <Icon name="Github" size={20} />
+                <Icon name="Youtube" size={20} />
               </a>
               <a
-                href="#"
+                href="https://t.me/fepensteam"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover:glow-cyan"
               >
-                <Icon name="Linkedin" size={20} />
+                <Icon name="Send" size={20} />
               </a>
               <a
-                href="#"
+                href="https://www.twitch.tv/fepens09"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover:glow-cyan"
               >
-                <Icon name="Mail" size={20} />
+                <Icon name="Twitch" size={20} />
               </a>
               <a
-                href="#"
+                href="https://dalink.to/fepens09"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all hover:glow-cyan"
               >
-                <Icon name="MessageCircle" size={20} />
+                <Icon name="Heart" size={20} />
               </a>
             </div>
           </div>
