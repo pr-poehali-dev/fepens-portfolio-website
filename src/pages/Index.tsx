@@ -234,6 +234,21 @@ const Index = () => {
               </Button>
             </form>
           </Card>
+          
+          <div className="mt-8 text-center">
+            <p className="text-muted-foreground mb-4">Хочешь поддержать мою работу?</p>
+            <a
+              href="https://www.donationalerts.com/r/fepens09"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block"
+            >
+              <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold px-8 py-6 text-lg shadow-lg hover:shadow-xl transition-all">
+                <Icon name="Heart" className="mr-2" size={24} />
+                Поддержать донатом
+              </Button>
+            </a>
+          </div>
         </div>
       </section>
 
