@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import ReCAPTCHA from 'react-google-recaptcha';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Icon from '@/components/ui/icon';
+
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +16,7 @@ const Index = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,17 +24,29 @@ const Index = () => {
     setSubmitStatus('idle');
 
     try {
+      const recaptchaToken = await recaptchaRef.current?.executeAsync();
+      
+      if (!recaptchaToken) {
+        setSubmitStatus('error');
+        setIsSubmitting(false);
+        return;
+      }
+
       const response = await fetch('https://functions.poehali.dev/22e2457a-ab80-4eae-888c-2a8f958482ab', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...formData,
+          recaptchaToken
+        })
       });
 
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', message: '' });
+        recaptchaRef.current?.reset();
       } else {
         setSubmitStatus('error');
       }
@@ -215,6 +231,11 @@ const Index = () => {
                   disabled={isSubmitting}
                 />
               </div>
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                size="invisible"
+                sitekey={RECAPTCHA_SITE_KEY}
+              />
               {submitStatus === 'success' && (
                 <div className="p-4 bg-primary/20 border border-primary rounded-lg text-center">
                   <p className="text-primary font-semibold">✓ Сообщение отправлено!</p>

@@ -1,6 +1,8 @@
 import json
 import os
 import smtplib
+import urllib.request
+import urllib.parse
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
@@ -42,6 +44,7 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     name = body_data.get('name', '')
     email = body_data.get('email', '')
     message = body_data.get('message', '')
+    recaptcha_token = body_data.get('recaptchaToken', '')
     
     if not name or not email or not message:
         return {
@@ -53,6 +56,41 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': json.dumps({'error': 'Missing required fields'}),
             'isBase64Encoded': False
         }
+    
+    # Verify reCAPTCHA
+    recaptcha_secret = os.environ.get('RECAPTCHA_SECRET_KEY')
+    if recaptcha_secret and recaptcha_token:
+        verify_url = 'https://www.google.com/recaptcha/api/siteverify'
+        data = urllib.parse.urlencode({
+            'secret': recaptcha_secret,
+            'response': recaptcha_token
+        }).encode()
+        
+        try:
+            req = urllib.request.Request(verify_url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            
+            if not result.get('success'):
+                return {
+                    'statusCode': 400,
+                    'headers': {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    },
+                    'body': json.dumps({'error': 'reCAPTCHA verification failed'}),
+                    'isBase64Encoded': False
+                }
+        except Exception as e:
+            return {
+                'statusCode': 500,
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                'body': json.dumps({'error': f'reCAPTCHA verification error: {str(e)}'}),
+                'isBase64Encoded': False
+            }
     
     smtp_host = os.environ.get('SMTP_HOST')
     smtp_port = int(os.environ.get('SMTP_PORT', '587'))
