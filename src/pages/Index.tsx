@@ -20,7 +20,7 @@ const Index = () => {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('https://functions.poehali.dev/7ad5c10c-3e74-4ef2-bf20-709a12b01069', {
+      const response = await fetch('https://functions.poehali.dev/22e2457a-ab80-4eae-888c-2a8f958482ab', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

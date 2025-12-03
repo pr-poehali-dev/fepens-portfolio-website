@@ -1,0 +1,50 @@
+{
+  "tests": [
+    {
+      "name": "Handle OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200,
+      "expectedBody": "",
+      "bodyMatcher": "exact"
+    },
+    {
+      "name": "Reject GET method",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 405,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Validate required fields",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Test User"
+      },
+      "expectedStatus": 400,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Send email successfully",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "name": "Ivan Petrov",
+        "email": "test@example.com",
+        "message": "Hello, this is a test message!"
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
